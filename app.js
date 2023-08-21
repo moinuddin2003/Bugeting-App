@@ -86,28 +86,32 @@ const listCreator = (expenseName,expenseValue) =>
     document.getElementById("list").appendChild(sublistContent);
 };
     //Fuction to calculate expenses and balnce
-    checkAmountButton.addEventListener("click" , () =>
-    {
-        //empty checks
-        if(!userAmount.value || !productTitle.value)
-        {
-            productTitleError.classList.remove("hide");
-            return false;
-        }
-        //Enable buttons
-        disableButtons(false);
-        //Expense
-        let expenditureValue = parseInt(userAmount.value);
-        //Total expense(Existinf + new)
-        let sum = parseInt(expenditureValue.innerText) + expenditureValue
-        expenditureValue.innerText = sum;
+    checkAmountButton.addEventListener("click", () => {
+      // Empty checks
+      if (!userAmount.value || !productTitle.value) {
+        productTitleError.classList.remove("hide");
+        return false;
+      }
 
-        //Total balance(budget - tottal expense)
-        const totalBalance = tempAmount - sum;
-        balanceValue.innerText = totalBalance;
-        //CreateList
-        listCreator(productTitle.value, userAmount.value);
-        // Empty inputs
-        productTitle.value = "";
-        userAmount.value = "";
+      // Enable buttons
+      disableButtons(false);
+
+      // Expense
+      let newExpenditureValue = parseInt(userAmount.value); // Renamed the variable
+
+      // Total expense (Existing + new)
+      let sum = parseInt(expenditureValue.innerText) + newExpenditureValue; // Use expenditureValue from HTML
+
+      expenditureValue.innerText = sum; // Update the expenditureValue
+
+      // Total balance (budget - total expense)
+      const totalBalance = tempAmount - sum;
+      balanceValue.innerText = totalBalance;
+
+      // Create list
+      listCreator(productTitle.value, userAmount.value);
+
+      // Empty inputs
+      productTitle.value = "";
+      userAmount.value = "";
     });
